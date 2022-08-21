@@ -11,3 +11,12 @@ function setup() {
 function draw() {
 	game.draw()
 }
+
+// function mouseMoved() {
+// 	if (mouseX >550 && mouseX<=700) {
+// 		game.player.moveRight(1)
+// 	}
+//     else if(mouseX >700 && 1000){
+//         game.player.moveRight(2)
+//     }
+// }

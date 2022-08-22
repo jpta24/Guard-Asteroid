@@ -5,7 +5,6 @@ class Player {
 
 	draw() {
 		let imgPanel = game.playerImg[0];
-		let imgRadar = game.playerImg[1];
 		image(imgPanel.src, -10, -10, width + 21, height + 22);
 		this.radar();
 

@@ -3,18 +3,21 @@ class Game {
 		this.background = new Background();
 		this.player = new Player();
 		// CHANGE THE MAX WIDTH AND HEIGHT
-		this.asteroid = new Asteroid(
+		this.asteroidImgs = [];
+		/* this.asteroid = new Asteroid(
 			Math.floor(Math.random() * 900) + 50,
 			Math.floor(Math.random() * 400) + 50
-		);
+		),this.asteroidImgs[Math.random()*(this.asteroidImgs.length -1)]; */
+		// this.asteroid = new Asteroid(500,200,Math.floor(Math.random() * 5))
 		this.rocketLeft = new RocketLeft();
 		this.rocketRight = new RocketRight()
 		this.backgroundImages;
 		this.playerImg;
-		this.asteroidImgs;
 		this.north = 0;
 		this.horizont = 0;
 		this.rightWeapon = [];
+		this.asteroids = [new Asteroid(Math.floor(Math.random() * 900) + 50,
+			Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5))]
 		this.frameCount;
 		this.rocketsImg;
 	}
@@ -60,12 +63,51 @@ class Game {
 	draw() {
 		clear();
 		this.background.draw();
-		this.asteroid.draw();
 
-		function resetValues(x,y) {
+		// ASTEROID
+		// this.asteroid.draw();
+		if (frameCount % 360 === 0) {
+			// console.log(this.asteroid);
+			this.asteroids.push(new Asteroid(Math.floor(Math.random() * 900) + 50,
+			Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5)))
+		}	
+
+		for (let i = this.asteroids.length - 1; i >= 0; i--) {
+			this.asteroids[i].draw();
 			
 		}
 
+		// this.asteroids.forEach(function (asteroid) {
+		// 		asteroid.draw()
+		// })
+			
+			
+			// let randomImage = this.asteroidImgs[Math.random()*(this.asteroidImgs.length -1)]
+			// console.log(this.asteroidImgs[0].src); 
+			// this.asteroids.push(new Asteroid(Math.floor(Math.random() * 900) + 50,
+			// Math.floor(Math.random() * 400) + 50,this.asteroidImgs[0].src))
+			// console.log(this.asteroid)
+		
+		// console.log(this.asteroids[0]);
+		// if (this.asteroids.length > 0) {
+		// 	this.asteroids.forEach(function (asteroid) {
+		// 	game.asteroid.draw()
+		// })
+		//}
+		
+		// we need an arrow function here so that 'this' has the right context 
+		// (that of the game object)
+		/* this.asteroids = this.asteroid.filter(obstacle => {
+			// console.log(this)
+			if (obstacle.collision(this.player) || obstacle.x < 0) {
+				return false
+			} else {
+				return true
+			}
+		}) */
+
+
+		// WEAPON
 		if (game.frameCount + 60 > frameCount && game.frameCount > 0) {
 			game.rocketLeft.rocketLaunchLeft();
 			game.rocketRight.rocketLaunchRight()
@@ -87,10 +129,11 @@ class Game {
 			game.player.fireWeaponLeft();
 		}
 
-		this.player.draw();
-		//Move later up
-		this.rocketLeft.draw();
 
+		// CONTROL PANEL
+		this.player.draw();
+
+		// MOVE THE SHIP
 		// this.checkMouseRight()
 		// this.checkMouseLeft()
 		// this.checkMouseUp()

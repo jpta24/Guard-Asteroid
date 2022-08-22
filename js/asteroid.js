@@ -1,5 +1,5 @@
 class Asteroid {
-	constructor(x,y) {
+	constructor(x,y,number) {
 		this.x = x;
 		this.y = y;
 		this.z = 1000;
@@ -10,22 +10,25 @@ class Asteroid {
 		this.size = 1;
 		this.turn = 45;
 		this.damage = 0;
+		this.randomImgNumber = number
 	}
 	draw() {
 		imageMode(CENTER);
-		let imgAst = game.asteroidImgs[0];
 		
 			// INCREASE SIZE
 		// this.width *= 1.003
 		// this.height *= 1.003
+
+		// Change Inicial Width and Height
 
 		// ROTATION
 		angleMode(DEGREES)
 		translate(game.north + this.x, game.horizont + this.y,);
 		
 		rotate(this.turn)
+
 		image(
-			imgAst.src, 
+			game.asteroidImgs[this.randomImgNumber].src, 
 			0,
 			0,
 			this.width,

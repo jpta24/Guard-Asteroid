@@ -20,7 +20,6 @@ class Asteroid {
 			this.width *= 1.003;
 			this.height *= 1.003;
 			this.z *=0.995 
-			console.log(this.z); 
 		}
 
 		// Change Inicial Width and Height

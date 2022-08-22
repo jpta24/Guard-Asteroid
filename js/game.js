@@ -4,11 +4,6 @@ class Game {
 		this.player = new Player();
 		// CHANGE THE MAX WIDTH AND HEIGHT
 		this.asteroidImgs = [];
-		/* this.asteroid = new Asteroid(
-			Math.floor(Math.random() * 900) + 50,
-			Math.floor(Math.random() * 400) + 50
-		),this.asteroidImgs[Math.random()*(this.asteroidImgs.length -1)]; */
-		// this.asteroid = new Asteroid(500,200,Math.floor(Math.random() * 5))
 		this.rocketLeft = new RocketLeft();
 		this.rocketRight = new RocketRight()
 		this.backgroundImages;
@@ -26,9 +21,6 @@ class Game {
 		this.backgroundImages = [
 			{ src: loadImage('assets/background/sky.png'), x: 0, y: 0, speed: 0 },
 			{ src: loadImage('assets/background/Galaxy1.png') },
-			// { src: loadImage('assets/background/plx-3.png'), x: 0, speed: 2 },
-			// { src: loadImage('assets/background/plx-4.png'), x: 0, speed: 3 },
-			// { src: loadImage('assets/background/plx-5.png'), x: 0, speed: 4 }
 		];
 		this.playerImg = [
 			{ src: loadImage('assets/background/panel.png') },
@@ -82,15 +74,17 @@ class Game {
 			game.rocketLeft.rocketLaunchLeft();
 			game.rocketRight.rocketLaunchRight()
 		} else {
-			game.rocketRight.x1 = 738;
-			game.rocketRight.y1 = 270; 
+			game.rocketRight.x = 738;
+			game.rocketRight.y = 270; 
 			game.rocketRight.width = 139;
 			game.rocketRight.height = 137;
+			game.rocketRight.z = 1;
 
-			game.rocketLeft.x1 = 238;
-			game.rocketLeft.y1 = 270;
+			game.rocketLeft.x = 238;
+			game.rocketLeft.y = 270;
 			game.rocketLeft.width = 139;
 			game.rocketLeft.height = 137;
+			game.rocketLeft.z = 1
 			game.frameCount = 0;
 		}
 
@@ -104,10 +98,10 @@ class Game {
 		this.player.draw();
 
 		// MOVE THE SHIP
-		this.checkMouseRight()
-		this.checkMouseLeft()
-		this.checkMouseUp()
-		this.checkMouseDown()
+		// this.checkMouseRight()
+		// this.checkMouseLeft()
+		// this.checkMouseUp()
+		// this.checkMouseDown()
 	}
 
 	checkMouseRight() {

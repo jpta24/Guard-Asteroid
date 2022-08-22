@@ -13,8 +13,8 @@ class Background {
         // Galaxy
 		image(
 			game.backgroundImages[1].src,
-			game.north + 200,
-			game.horizont + 200,
+			game.north + 50,
+			game.horizont + 50,
 			200,
 			100
 		);

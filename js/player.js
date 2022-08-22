@@ -1,11 +1,14 @@
 class Player {
-	constructor() {}
+	constructor() {
+		
+	}
 
 	draw() {
 		let imgPanel = game.playerImg[0];
 		let imgRadar = game.playerImg[1];
 		image(imgPanel.src, -10, -10, width + 21, height + 22);
 		this.radar();
+
 	}
 
 	radar() {
@@ -35,11 +38,11 @@ class Player {
 		game.horizont += 1 * val;
 	}
 
-	fireWeaponRight(){
-	    image(game.playerImg[2].src,700,220,80,80)
+	fireWeaponRight() {
+		image(game.playerImg[2].src, 700, 220, 80, 80);
 	}
 
-	fireWeaponLeft(){
-	    image(game.playerImg[2].src,220 ,220,80,80)
+	fireWeaponLeft() {
+		image(game.playerImg[2].src, 220, 220, 80, 80);
 	}
 }

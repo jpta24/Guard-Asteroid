@@ -7,6 +7,8 @@ class Game {
 			Math.floor(Math.random() * 900) + 50,
 			Math.floor(Math.random() * 400) + 50
 		);
+		this.rocketLeft = new RocketLeft();
+		this.rocketRight = new RocketRight()
 		this.backgroundImages;
 		this.playerImg;
 		this.asteroidImgs;
@@ -14,6 +16,7 @@ class Game {
 		this.horizont = 0;
 		this.rightWeapon = [];
 		this.frameCount;
+		this.rocketsImg;
 	}
 
 	preload() {
@@ -46,6 +49,12 @@ class Game {
 				src: loadImage('assets/background/Asteroid 5.png'),
 			},
 		];
+		this.rocketsImg = [
+			{ src: loadImage('../assets/background/rocket left.png') },
+			{ src: loadImage('../assets/background/rocket right.png') },
+			{ src: loadImage('../assets/background/blue propulsion left.gif') },
+			{ src: loadImage('../assets/background/blue propulsion right.gif') },
+		];
 	}
 
 	draw() {
@@ -53,13 +62,35 @@ class Game {
 		this.background.draw();
 		this.asteroid.draw();
 
-		if (game.frameCount + 20 > frameCount) {
+		function resetValues(x,y) {
+			
+		}
+
+		if (game.frameCount + 60 > frameCount && game.frameCount > 0) {
+			game.rocketLeft.rocketLaunchLeft();
+			game.rocketRight.rocketLaunchRight()
+		} else {
+			game.rocketRight.x1 = 738;
+			game.rocketRight.y1 = 270; 
+			game.rocketRight.width = 139;
+			game.rocketRight.height = 137;
+
+			game.rocketLeft.x1 = 238;
+			game.rocketLeft.y1 = 270;
+			game.rocketLeft.width = 139;
+			game.rocketLeft.height = 137;
+			game.frameCount = 0;
+		}
+
+		if (game.frameCount + 20 > frameCount && game.frameCount > 0) {
 			game.player.fireWeaponRight();
 			game.player.fireWeaponLeft();
 		}
 
 		this.player.draw();
-		
+		//Move later up
+		this.rocketLeft.draw();
+
 		// this.checkMouseRight()
 		// this.checkMouseLeft()
 		// this.checkMouseUp()

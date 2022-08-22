@@ -5,10 +5,6 @@ class Player {
 		let imgPanel = game.playerImg[0];
 		let imgRadar = game.playerImg[1];
 		image(imgPanel.src, -10, -10, width + 21, height + 22);
-
-		// BlueFire on Weapon
-		// image(game.playerImg[2].src,700,225,80,80)
-
 		this.radar();
 	}
 
@@ -22,7 +18,6 @@ class Player {
 		translate(500, 442);
 
 		rotate(-game.north / 10);
-		console.log('her');
 
 		image(imgRadar.src, 0, 0, 65, 65);
 
@@ -38,5 +33,13 @@ class Player {
 
 	movementY(val) {
 		game.horizont += 1 * val;
+	}
+
+	fireWeaponRight(){
+	    image(game.playerImg[2].src,700,220,80,80)
+	}
+
+	fireWeaponLeft(){
+	    image(game.playerImg[2].src,220 ,220,80,80)
 	}
 }

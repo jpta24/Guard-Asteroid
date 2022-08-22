@@ -3,12 +3,17 @@ class Game {
 		this.background = new Background();
 		this.player = new Player();
 		// CHANGE THE MAX WIDTH AND HEIGHT
-		this.asteroid = new Asteroid(Math.floor(Math.random() * 900 )+50,Math.floor(Math.random() * 400 )+50);
+		this.asteroid = new Asteroid(
+			Math.floor(Math.random() * 900) + 50,
+			Math.floor(Math.random() * 400) + 50
+		);
 		this.backgroundImages;
 		this.playerImg;
 		this.asteroidImgs;
 		this.north = 0;
 		this.horizont = 0;
+		this.rightWeapon = [];
+		this.frameCount;
 	}
 
 	preload() {
@@ -47,7 +52,14 @@ class Game {
 		clear();
 		this.background.draw();
 		this.asteroid.draw();
+
+		if (game.frameCount + 20 > frameCount) {
+			game.player.fireWeaponRight();
+			game.player.fireWeaponLeft();
+		}
+
 		this.player.draw();
+		
 		// this.checkMouseRight()
 		// this.checkMouseLeft()
 		// this.checkMouseUp()
@@ -79,4 +91,15 @@ class Game {
 			game.player.movementY(-1);
 		}
 	}
+	/* keyPressed() { 
+		
+		
+		if (keyCode === 32) {
+			this.frameCount = frameCount
+			console.log(frameCount);
+			game.player.fireWeaponRight()
+			console.log('h');
+			
+		}
+	} */
 }

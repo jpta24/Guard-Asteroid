@@ -65,9 +65,8 @@ class Game {
 		this.background.draw();
 
 		// ASTEROID
-		// this.asteroid.draw();
-		if (frameCount % 360 === 0) {
-			// console.log(this.asteroid);
+		// CHANGE FREQUENCY
+		if (frameCount % 3500 === 0) {
 			this.asteroids.push(new Asteroid(Math.floor(Math.random() * 900) + 50,
 			Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5)))
 		}	
@@ -76,35 +75,6 @@ class Game {
 			this.asteroids[i].draw();
 			
 		}
-
-		// this.asteroids.forEach(function (asteroid) {
-		// 		asteroid.draw()
-		// })
-			
-			
-			// let randomImage = this.asteroidImgs[Math.random()*(this.asteroidImgs.length -1)]
-			// console.log(this.asteroidImgs[0].src); 
-			// this.asteroids.push(new Asteroid(Math.floor(Math.random() * 900) + 50,
-			// Math.floor(Math.random() * 400) + 50,this.asteroidImgs[0].src))
-			// console.log(this.asteroid)
-		
-		// console.log(this.asteroids[0]);
-		// if (this.asteroids.length > 0) {
-		// 	this.asteroids.forEach(function (asteroid) {
-		// 	game.asteroid.draw()
-		// })
-		//}
-		
-		// we need an arrow function here so that 'this' has the right context 
-		// (that of the game object)
-		/* this.asteroids = this.asteroid.filter(obstacle => {
-			// console.log(this)
-			if (obstacle.collision(this.player) || obstacle.x < 0) {
-				return false
-			} else {
-				return true
-			}
-		}) */
 
 
 		// WEAPON
@@ -134,10 +104,10 @@ class Game {
 		this.player.draw();
 
 		// MOVE THE SHIP
-		// this.checkMouseRight()
-		// this.checkMouseLeft()
-		// this.checkMouseUp()
-		// this.checkMouseDown()
+		this.checkMouseRight()
+		this.checkMouseLeft()
+		this.checkMouseUp()
+		this.checkMouseDown()
 	}
 
 	checkMouseRight() {

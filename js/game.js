@@ -2,7 +2,8 @@ class Game {
 	constructor() {
 		this.background = new Background();
 		this.player = new Player();
-		this.asteroid = new Asteroid();
+		// CHANGE THE MAX WIDTH AND HEIGHT
+		this.asteroid = new Asteroid(Math.floor(Math.random() * 900 )+50,Math.floor(Math.random() * 400 )+50);
 		this.backgroundImages;
 		this.playerImg;
 		this.asteroidImgs;
@@ -13,7 +14,7 @@ class Game {
 	preload() {
 		this.backgroundImages = [
 			{ src: loadImage('assets/background/sky.png'), x: 0, y: 0, speed: 0 },
-			// { src: loadImage('assets/background/panel.png'), x: 0, speed: 1 },
+			{ src: loadImage('assets/background/Galaxy1.png') },
 			// { src: loadImage('assets/background/plx-3.png'), x: 0, speed: 2 },
 			// { src: loadImage('assets/background/plx-4.png'), x: 0, speed: 3 },
 			// { src: loadImage('assets/background/plx-5.png'), x: 0, speed: 4 }
@@ -21,60 +22,23 @@ class Game {
 		this.playerImg = [
 			{ src: loadImage('assets/background/panel.png') },
 			{ src: loadImage('assets/background/radar.png') },
+			{ src: loadImage('../assets/background/Explosion Blue.gif') },
 		];
 		this.asteroidImgs = [
 			{
 				src: loadImage('assets/background/Asteroid 1.png'),
-				x: 500,
-				y: 200,
-				z: 1000,
-                width: 50,
-                height: 50,
-                scale: 0,
-				speed: 10,
-				size: 1,
-				turn: 1,
-                damage:0
 			},
 			{
 				src: loadImage('assets/background/Asteroid 2.png'),
-				x: 500,
-				y: 200,
-				z: 1000,
-				speed: 10,
-				size: 1,
-				turn: 1,
-                damage:0
 			},
 			{
 				src: loadImage('assets/background/Asteroid 3.png'),
-				x: 500,
-				y: 200,
-				z: 1000,
-				speed: 10,
-				size: 1,
-				turn: 1,
-                damage:0
 			},
 			{
 				src: loadImage('assets/background/Asteroid 4.png'),
-				x: 500,
-				y: 200,
-				z: 1000,
-				speed: 10,
-				size: 1,
-				turn: 1,
-                damage:0
 			},
 			{
 				src: loadImage('assets/background/Asteroid 5.png'),
-				x: 500,
-				y: 200,
-				z: 1000,
-				speed: 10,
-				size: 1,
-				turn: 1,
-                damage:0
 			},
 		];
 	}
@@ -82,7 +46,7 @@ class Game {
 	draw() {
 		clear();
 		this.background.draw();
-        this.asteroid.draw();
+		this.asteroid.draw();
 		this.player.draw();
 		// this.checkMouseRight()
 		// this.checkMouseLeft()
@@ -115,11 +79,4 @@ class Game {
 			game.player.movementY(-1);
 		}
 	}
-	// checkMouseRight() {
-	// 	if (mouseX > 550 && mouseX <= 700) {
-	// 		game.player.moveRight(1);
-	// 	} else if (mouseX > 700 && 1000) {
-	// 		game.player.moveRight(2);
-	// 	}
-	// }
 }

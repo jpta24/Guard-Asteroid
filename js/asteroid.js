@@ -98,7 +98,7 @@ class Asteroid {
 			
 			game.rocketLeft.y = -2000;
 		}
-		if (this.damage >=3) {
+		if (this.damage >=2) {
 			this.isActive = false
 			game.player.score ++
 		}

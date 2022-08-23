@@ -2,6 +2,9 @@ const game = new Game();
 let font,
 	fontsize = 40;
 
+let button;
+let button2;
+
 function preload() {
 	font = loadFont('../assets/fonts/BattleStar-K7dl7.ttf');
 	game.preload();
@@ -12,38 +15,34 @@ function setup() {
 	textFont(font);
 	textSize(fontsize);
 	textAlign(CENTER, CENTER);
-	
+	game.setup()
 
-	let col = color(0,255,255)
-	
-	button = createButton('RELOAD WEAPONS');
-	button.style('font-size', '8px');
-	button.style('font-weight', 'bolder');
-	button.style('font-family', 'verdana');
-	button.style('width', '60px');
-	button.style('height', '60px');
-	button.style('border-radius', '10px');
-	button.style('border-style', 'outset');
-	// button.style('justify-content', 'center');
-	button.style('background-color', col);
-	button.position(560, 470);
-	button.mousePressed(function () {
-			game.weapon.isWeaponReloading = true;
-			game.weapon.weaponFrameCount = frameCount
-			game.weapon.isLoadingComplete = true
-		});
 }
 
 function draw() {
 	game.draw();
+	// if (game.player.damage === 2) {
+	// 	this.button.position(-100, -100);
+	// 	button2.position(620, 455);
+	// 	game.player.draw();
+		
+	// 	//DISPLAY SCORE
+	// 	fill(0, 255, 255);
+	// 	textSize(60);
+	// 	text(game.player.score, 502, 250);
+	// }
 }
 
 function keyPressed() {
-	if (keyCode === 32 && game.ammo.isAmmoReloading === false && game.ammo.ammo > 0) {
+	if (
+		keyCode === 32 &&
+		game.ammo.isAmmoReloading === false &&
+		game.ammo.ammo > 0
+	) {
 		game.frameCount = frameCount;
 		game.ammo.isAmmoReloading = true;
 		game.ammo.ammo--;
-		game.ammo.ammoFrameCount = frameCount
+		game.ammo.ammoFrameCount = frameCount;
 	}
 
 	if (keyCode === 39) {

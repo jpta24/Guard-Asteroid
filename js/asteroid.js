@@ -98,6 +98,9 @@ class Asteroid {
 			
 			game.rocketLeft.y = -2000;
 		}
+		if (this.damage >=3) {
+			this.isActive = false
+		}
 	}
 
 	provideDamage(){
@@ -105,9 +108,7 @@ class Asteroid {
 		if (this.z < 10) {
 			game.player.damage +=1
 			this.isActive = false
-
 		}
 		
-		console.log(game.player.damage);
 	}
 }

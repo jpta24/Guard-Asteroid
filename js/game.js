@@ -36,13 +36,15 @@ class Game {
 		this.ammo = {
 			ammoFrameCount: 0,
 			isAmmoReloading: false,
-			isWeaponReloading: false,
 			ammo: 4,
 			timerFixer: 0,
 		};
-		// this.isAmmoReloading = false;
-		// this.isWeaponReloading = false;
-		// this.ammo = 4;
+		this.weapon= {
+			weaponFrameCount: 0,
+			isWeaponReloading : false,
+			isLoadingComplete: false
+
+		}
 	}
 
 	preload() {
@@ -201,26 +203,46 @@ class Game {
 		// CONTROL PANEL
 		this.player.draw();
 
+		//DISPLAY SCORE
+		fill(0, 255, 255);
+		textSize(40);
+		text(game.player.score, 555, 415);
+
+		//WEAPON RELOADING
+		if (this.weapon.isWeaponReloading === true && this.weapon.weaponFrameCount + 300 > frameCount) {
+			this.ammo.timerFixer = (frameCount - this.weapon.weaponFrameCount)/2;
+			displayReloading();
+		} else {
+			this.weapon.isWeaponReloading =false
+			this.weapon.weaponFrameCount = 0
+		}
+		
+
+		// console.log(this.weapon.isWeaponReloading === false && this.weapon.isLoadingComplete === true);
+
+		if (this.weapon.isWeaponReloading === false && this.weapon.isLoadingComplete === true) {
+			this.ammo.ammo = 4 
+			this.weapon.isLoadingComplete = false
+		}
+		
+
+
 		// TIMER RELOADING AMMO
 		if (
 			this.ammo.isAmmoReloading === true &&
 			this.ammo.ammoFrameCount + 150 > frameCount
 		) {
 			this.ammo.timerFixer = frameCount - this.ammo.ammoFrameCount;
-			fill(0, 255, 255);
-			textSize(40);
-			text(game.player.score, 555, 415);
-			textSize(12);
-			fill(255, 255, 255);
-			text('RELOADING', 632, 372);
-			text('RELOADING', 305, 372);
-			fill(0, 255, 255);
-			textSize(40);
+			displayReloading();
 		} else {
 			this.ammo.isAmmoReloading = false;
 			this.ammo.ammoFrameCount = 0;
-			this.ammo.timerFixer = 0;
 		}
+
+		if (this.ammo.isAmmoReloading === false && this.weapon.isWeaponReloading === false) {
+			this.ammo.timerFixer = 0
+		}
+
 		strokeWeight(10);
 		stroke(0, 255, 255);
 		line(175, 430, 325 - this.ammo.timerFixer, 430);
@@ -238,6 +260,14 @@ class Game {
 		displayAmmos(185, 30);
 
 		imageMode(CORNER);
+
+		function displayReloading() {
+			textSize(12);
+			fill(255, 255, 255);
+			text('RELOADING', 632, 372);
+			text('RELOADING', 305, 372);
+			textSize(40);
+		}
 
 		// MOVE THE SHIP
 		// this.checkMouseRight()

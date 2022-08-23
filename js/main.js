@@ -12,6 +12,26 @@ function setup() {
 	textFont(font);
 	textSize(fontsize);
 	textAlign(CENTER, CENTER);
+	
+
+	let col = color(0,255,255)
+	
+	button = createButton('RELOAD WEAPONS');
+	button.style('font-size', '8px');
+	button.style('font-weight', 'bolder');
+	button.style('font-family', 'verdana');
+	button.style('width', '60px');
+	button.style('height', '60px');
+	button.style('border-radius', '10px');
+	button.style('border-style', 'outset');
+	// button.style('justify-content', 'center');
+	button.style('background-color', col);
+	button.position(560, 470);
+	button.mousePressed(function () {
+			game.weapon.isWeaponReloading = true;
+			game.weapon.weaponFrameCount = frameCount
+			game.weapon.isLoadingComplete = true
+		});
 }
 
 function draw() {
@@ -27,7 +47,6 @@ function keyPressed() {
 	}
 
 	if (keyCode === 39) {
-		// move the player to the right
 		game.player.movementX(-10);
 	}
 	if (keyCode === 37) {
@@ -37,7 +56,6 @@ function keyPressed() {
 		game.player.movementY(10);
 	}
 	if (keyCode === 40) {
-		// move the player to the right
 		game.player.movementY(-10);
 	}
 }

@@ -1,10 +1,14 @@
 class Player {
 	constructor() {
+		this.damage = 0
 		
 	}
 
 	draw() {
 		let imgPanel = game.playerImg[0];
+		if (this.damage === 1 ) {
+			imgPanel = game.playerImg[3]
+		}
 		image(imgPanel.src, -10, -10, width + 21, height + 22);
 		this.radar();
 

@@ -5,9 +5,6 @@ class RocketRight {
 		this.width;
 		this.height;
 	}
-	draw() {
-		// this.rocketLaunchLeft()
-	}
 
 	rocketLaunchRight() {
 		imageMode(CENTER);

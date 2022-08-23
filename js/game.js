@@ -14,10 +14,18 @@ class Game {
 		// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
 		// this.asteroids = [new Asteroid(Math.floor(Math.random() * 900) + 50,
 		// 	Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5))]
-		this.asteroids = [new Asteroid(618, 150, Math.floor(Math.random() * 5))];
+		this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
 		this.frameCount;
 		this.rocketsImg;
 		this.rocketRightAmmo = {
+			isExplosion: false,
+			explosionFrameCount: 0,
+			explosionX: 0,
+			explosionY: 0,
+			explosionW: 0,
+			explosionH: 0,
+		};
+		this.rocketLeftAmmo = {
 			isExplosion: false,
 			explosionFrameCount: 0,
 			explosionX: 0,
@@ -38,6 +46,7 @@ class Game {
 			{ src: loadImage('assets/background/panel.png') },
 			{ src: loadImage('assets/background/radar.png') },
 			{ src: loadImage('../assets/background/Explosion Blue.gif') },
+			{ src: loadImage('../assets/background/panel damaged.png') },
 		];
 		this.asteroidImgs = [
 			{
@@ -85,18 +94,33 @@ class Game {
 		for (let i = this.asteroids.length - 1; i >= 0; i--) {
 			this.asteroids[i].draw();
 		}
+		this.asteroids = this.asteroids.filter((asteroid) => {
+			if (asteroid.isActive) {
+				return true
+			} else {
+				return false
+			}
+		});
 		//ASTEROID EXPLOSION
+		// ROCKET RIGHT
 		if (
 			this.rocketRightAmmo.isExplosion === true &&
 			this.rocketRightAmmo.explosionFrameCount + 50 > frameCount
 		) {
-			//EXPLOSION
+			//EXPLOSION RIGHT AMMO
 			imageMode(CENTER);
 			translate(
-				this.north + this.rocketRightAmmo.explosionX,this.horizont + this.rocketRightAmmo.explosionY
+				this.north + this.rocketRightAmmo.explosionX,
+				this.horizont + this.rocketRightAmmo.explosionY
 			);
 
-			image(this.asteroidImgs[5].src, 0, 0, this.rocketRightAmmo.explosionW, this.rocketRightAmmo.explosionH);
+			image(
+				this.asteroidImgs[5].src,
+				0,
+				0,
+				this.rocketRightAmmo.explosionW,
+				this.rocketRightAmmo.explosionH
+			);
 
 			imageMode(CORNER);
 			translate(
@@ -106,6 +130,36 @@ class Game {
 		} else {
 			this.rocketRightAmmo.isExplosion = false;
 			this.rocketRightAmmo.explosionFrameCount = 0;
+		}
+
+		//ROCKET LEFT
+		if (
+			this.rocketLeftAmmo.isExplosion === true &&
+			this.rocketLeftAmmo.explosionFrameCount + 50 > frameCount
+		) {
+			//EXPLOSION RIGHT AMMO
+			imageMode(CENTER);
+			translate(
+				this.north + this.rocketLeftAmmo.explosionX,
+				this.horizont + this.rocketLeftAmmo.explosionY
+			);
+
+			image(
+				this.asteroidImgs[5].src,
+				0,
+				0,
+				this.rocketLeftAmmo.explosionW,
+				this.rocketLeftAmmo.explosionH
+			);
+
+			imageMode(CORNER);
+			translate(
+				-this.north - this.rocketLeftAmmo.explosionX,
+				-this.horizont - this.rocketLeftAmmo.explosionY
+			);
+		} else {
+			this.rocketLeftAmmo.isExplosion = false;
+			this.rocketLeftAmmo.explosionFrameCount = 0;
 		}
 
 		// WEAPON

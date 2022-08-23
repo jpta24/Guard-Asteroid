@@ -33,11 +33,16 @@ class Game {
 			explosionW: 0,
 			explosionH: 0,
 		};
-		this.isExplosionLeft = false;
-		this.explosionLeftFrameCount;
-		this.isAmmoReloading = false;
-		this.isWeaponReloading = false;
-		this.ammo = 4;
+		this.ammo = {
+			ammoFrameCount: 0,
+			isAmmoReloading: false,
+			isWeaponReloading: false,
+			ammo: 4,
+			timerFixer: 0,
+		};
+		// this.isAmmoReloading = false;
+		// this.isWeaponReloading = false;
+		// this.ammo = 4;
 	}
 
 	preload() {
@@ -195,20 +200,37 @@ class Game {
 
 		// CONTROL PANEL
 		this.player.draw();
-		fill(0, 255, 255);
-		text(game.player.score, 555, 415);
 
 		// TIMER RELOADING AMMO
+		if (
+			this.ammo.isAmmoReloading === true &&
+			this.ammo.ammoFrameCount + 150 > frameCount
+		) {
+			this.ammo.timerFixer = frameCount - this.ammo.ammoFrameCount;
+			fill(0, 255, 255);
+			textSize(40);
+			text(game.player.score, 555, 415);
+			textSize(12);
+			fill(255, 255, 255);
+			text('RELOADING', 632, 372);
+			text('RELOADING', 305, 372);
+			fill(0, 255, 255);
+			textSize(40);
+		} else {
+			this.ammo.isAmmoReloading = false;
+			this.ammo.ammoFrameCount = 0;
+			this.ammo.timerFixer = 0;
+		}
 		strokeWeight(10);
 		stroke(0, 255, 255);
-		line(175, 430, 320, 430);
-		line(615, 430, 760, 430);
+		line(175, 430, 325 - this.ammo.timerFixer, 430);
+		line(610 + this.ammo.timerFixer, 430, 760, 430);
 		strokeWeight(1);
 
 		// DISPLAY AMMO
 		imageMode(CENTER);
 		let displayAmmos = (x1, dist) => {
-			for (let i = 0; i < this.ammo; i++) {
+			for (let i = 0; i < this.ammo.ammo; i++) {
 				image(this.playerImg[4].src, x1 + dist * i, 400, 17, 33);
 			}
 		};

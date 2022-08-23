@@ -19,11 +19,11 @@ function draw() {
 }
 
 function keyPressed() {
-	if (keyCode === 32) {
+	if (keyCode === 32 && game.ammo.isAmmoReloading === false && game.ammo.ammo > 0) {
 		game.frameCount = frameCount;
-		game.isAmmoReloading = true;
-		game.ammo--;
-		console.log(game.isAmmoReloading + ' - ' + game.ammo);
+		game.ammo.isAmmoReloading = true;
+		game.ammo.ammo--;
+		game.ammo.ammoFrameCount = frameCount
 	}
 
 	if (keyCode === 39) {

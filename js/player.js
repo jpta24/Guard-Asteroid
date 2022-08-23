@@ -1,6 +1,7 @@
 class Player {
 	constructor() {
 		this.damage = 0
+		this.score = 0
 		
 	}
 

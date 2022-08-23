@@ -1,11 +1,18 @@
 const game = new Game();
+let font,
+  fontsize = 40;
 
 function preload() {
+
+	font = loadFont('../assets/fonts/BattleStar-K7dl7.ttf');
 	game.preload();
 }
 
 function setup() {
 	createCanvas(1000, 500);
+	textFont(font);
+  textSize(fontsize);
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {

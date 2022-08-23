@@ -191,6 +191,8 @@ class Game {
 
 		// CONTROL PANEL
 		this.player.draw();
+		fill(0, 255, 255)
+		text(game.player.score, 555, 415)
 
 		// MOVE THE SHIP
 		// this.checkMouseRight()

@@ -100,6 +100,7 @@ class Asteroid {
 		}
 		if (this.damage >=3) {
 			this.isActive = false
+			game.player.score ++
 		}
 	}
 

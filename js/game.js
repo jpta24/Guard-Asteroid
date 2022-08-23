@@ -35,6 +35,9 @@ class Game {
 		};
 		this.isExplosionLeft = false;
 		this.explosionLeftFrameCount;
+		this.isAmmoReloading = false;
+		this.isWeaponReloading = false;
+		this.ammo = 4;
 	}
 
 	preload() {
@@ -47,6 +50,7 @@ class Game {
 			{ src: loadImage('assets/background/radar.png') },
 			{ src: loadImage('../assets/background/Explosion Blue.gif') },
 			{ src: loadImage('../assets/background/panel damaged.png') },
+			{ src: loadImage('../assets/background/rocket panel.png') },
 		];
 		this.asteroidImgs = [
 			{
@@ -96,9 +100,9 @@ class Game {
 		}
 		this.asteroids = this.asteroids.filter((asteroid) => {
 			if (asteroid.isActive) {
-				return true
+				return true;
 			} else {
-				return false
+				return false;
 			}
 		});
 		//ASTEROID EXPLOSION
@@ -191,8 +195,27 @@ class Game {
 
 		// CONTROL PANEL
 		this.player.draw();
-		fill(0, 255, 255)
-		text(game.player.score, 555, 415)
+		fill(0, 255, 255);
+		text(game.player.score, 555, 415);
+
+		// TIMER RELOADING AMMO
+		strokeWeight(10);
+		stroke(0, 255, 255);
+		line(175, 430, 320, 430);
+		line(615, 430, 760, 430);
+		strokeWeight(1);
+
+		// DISPLAY AMMO
+		imageMode(CENTER);
+		let displayAmmos = (x1, dist) => {
+			for (let i = 0; i < this.ammo; i++) {
+				image(this.playerImg[4].src, x1 + dist * i, 400, 17, 33);
+			}
+		};
+		displayAmmos(750, -30);
+		displayAmmos(185, 30);
+
+		imageMode(CORNER);
 
 		// MOVE THE SHIP
 		// this.checkMouseRight()

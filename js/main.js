@@ -1,9 +1,8 @@
 const game = new Game();
 let font,
-  fontsize = 40;
+	fontsize = 40;
 
 function preload() {
-
 	font = loadFont('../assets/fonts/BattleStar-K7dl7.ttf');
 	game.preload();
 }
@@ -11,18 +10,20 @@ function preload() {
 function setup() {
 	createCanvas(1000, 500);
 	textFont(font);
-  textSize(fontsize);
-  textAlign(CENTER, CENTER);
+	textSize(fontsize);
+	textAlign(CENTER, CENTER);
 }
 
 function draw() {
 	game.draw();
-
 }
 
 function keyPressed() {
 	if (keyCode === 32) {
-		game.frameCount = frameCount; 
+		game.frameCount = frameCount;
+		game.isAmmoReloading = true;
+		game.ammo--;
+		console.log(game.isAmmoReloading + ' - ' + game.ammo);
 	}
 
 	if (keyCode === 39) {

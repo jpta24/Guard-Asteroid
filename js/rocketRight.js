@@ -21,9 +21,10 @@ class RocketRight {
 		let decreaseLevel = 0.95;
 		this.width *= decreaseLevel;
 		this.height *= decreaseLevel;
-        this.z *= 1.1242;
+        // this.z *= 1.0808;
+		this.z += 11.225;
 
-		console.log(this.z);
+        // console.log(this.z);
 
 		imageMode(CORNER);
 	}

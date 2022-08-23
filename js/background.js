@@ -18,5 +18,7 @@ class Background {
 			200,
 			100
 		);
+
+		
 	}
 }

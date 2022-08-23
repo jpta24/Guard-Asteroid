@@ -5,16 +5,28 @@ class Game {
 		// CHANGE THE MAX WIDTH AND HEIGHT
 		this.asteroidImgs = [];
 		this.rocketLeft = new RocketLeft();
-		this.rocketRight = new RocketRight()
+		this.rocketRight = new RocketRight();
 		this.backgroundImages;
 		this.playerImg;
 		this.north = 0;
 		this.horizont = 0;
 		this.rightWeapon = [];
-		this.asteroids = [new Asteroid(Math.floor(Math.random() * 900) + 50,
-			Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5))]
+		// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
+		// this.asteroids = [new Asteroid(Math.floor(Math.random() * 900) + 50,
+		// 	Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5))]
+		this.asteroids = [new Asteroid(618, 150, Math.floor(Math.random() * 5))];
 		this.frameCount;
 		this.rocketsImg;
+		this.rocketRightAmmo = {
+			isExplosion: false,
+			explosionFrameCount: 0,
+			explosionX: 0,
+			explosionY: 0,
+			explosionW: 0,
+			explosionH: 0,
+		};
+		this.isExplosionLeft = false;
+		this.explosionLeftFrameCount;
 	}
 
 	preload() {
@@ -43,6 +55,9 @@ class Game {
 			{
 				src: loadImage('assets/background/Asteroid 5.png'),
 			},
+			{
+				src: loadImage('../assets/background/Explosion Fire.gif'),
+			},
 		];
 		this.rocketsImg = [
 			{ src: loadImage('../assets/background/rocket left.png') },
@@ -58,24 +73,51 @@ class Game {
 
 		// ASTEROID
 		// CHANGE FREQUENCY
-		if (frameCount % 3500 === 0) {
-			this.asteroids.push(new Asteroid(Math.floor(Math.random() * 900) + 50,
-			Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5)))
-		}	
+		if (frameCount % 30500 === 0) {
+			// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
+			/* this.asteroids.push(new Asteroid(Math.floor(Math.random() * 900) + 50,
+			Math.floor(Math.random() * 400) + 50,Math.floor(Math.random() * 5))) */
+			this.asteroids.push(
+				new Asteroid(500, 200, Math.floor(Math.random() * 5))
+			);
+		}
 
 		for (let i = this.asteroids.length - 1; i >= 0; i--) {
 			this.asteroids[i].draw();
-			
+		}
+		//ASTEROID EXPLOSION
+		if (
+			this.rocketRightAmmo.isExplosion === true &&
+			this.rocketRightAmmo.explosionFrameCount + 50 > frameCount
+		) {
+			//EXPLOSION
+			imageMode(CENTER);
+			translate(
+				this.north + this.rocketRightAmmo.explosionX,this.horizont + this.rocketRightAmmo.explosionY
+			);
+
+			image(this.asteroidImgs[5].src, 0, 0, this.rocketRightAmmo.explosionW, this.rocketRightAmmo.explosionH);
+
+			imageMode(CORNER);
+			translate(
+				-this.north - this.rocketRightAmmo.explosionX,
+				-this.horizont - this.rocketRightAmmo.explosionY
+			);
+		} else {
+			this.rocketRightAmmo.isExplosion = false;
+			this.rocketRightAmmo.explosionFrameCount = 0;
 		}
 
-
 		// WEAPON
-		if (game.frameCount + 60 > frameCount && game.frameCount > 0) {
+		if (game.frameCount + 90 > frameCount && game.frameCount > 0) {
 			game.rocketLeft.rocketLaunchLeft();
-			game.rocketRight.rocketLaunchRight()
+			game.rocketRight.rocketLaunchRight();
+			for (let i = this.asteroids.length - 1; i >= 0; i--) {
+				this.asteroids[i].receiveDamage();
+			}
 		} else {
 			game.rocketRight.x = 738;
-			game.rocketRight.y = 270; 
+			game.rocketRight.y = 270;
 			game.rocketRight.width = 139;
 			game.rocketRight.height = 137;
 			game.rocketRight.z = 1;
@@ -84,7 +126,7 @@ class Game {
 			game.rocketLeft.y = 270;
 			game.rocketLeft.width = 139;
 			game.rocketLeft.height = 137;
-			game.rocketLeft.z = 1
+			game.rocketLeft.z = 1;
 			game.frameCount = 0;
 		}
 
@@ -92,7 +134,6 @@ class Game {
 			game.player.fireWeaponRight();
 			game.player.fireWeaponLeft();
 		}
-
 
 		// CONTROL PANEL
 		this.player.draw();

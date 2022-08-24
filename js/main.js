@@ -12,11 +12,11 @@ let explosioAudio;
 let crashAudio;
 
 function preload() {
-	font = loadFont('../assets/fonts/BattleStar-K7dl7.ttf');
+	font = loadFont('assets/fonts/BattleStar-K7dl7.ttf');
 	
-	laserAudio = loadSound('../assets/audio/Laser.mp3');
-	explosioAudio = loadSound('../assets/audio/Explosion Hit.mp3');
-	crashAudio = loadSound('../assets/audio/Ship Crashing.mp3');
+	laserAudio = loadSound('assets/audio/Laser.mp3');
+	explosioAudio = loadSound('assets/audio/Explosion Hit.mp3');
+	crashAudio = loadSound('assets/audio/Ship Crashing.mp3');
 	game.preload();
 }
 

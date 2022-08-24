@@ -162,11 +162,11 @@ class Game {
 		this.playerImg = [
 			{ src: loadImage('assets/background/panel.png') },
 			{ src: loadImage('assets/background/radar.png') },
-			{ src: loadImage('../assets/background/Explosion Blue.gif') },
-			{ src: loadImage('../assets/background/panel damaged.png') },
-			{ src: loadImage('../assets/background/rocket panel.png') },
-			{ src: loadImage('../assets/background/Game over.png') },
-			{ src: loadImage('../assets/background/Start Panel.png') },
+			{ src: loadImage('assets/background/Explosion Blue.gif') },
+			{ src: loadImage('assets/background/panel damaged.png') },
+			{ src: loadImage('assets/background/rocket panel.png') },
+			{ src: loadImage('assets/background/Game over.png') },
+			{ src: loadImage('assets/background/Start Panel.png') },
 
 		];
 		this.asteroidImgs = [
@@ -175,13 +175,13 @@ class Game {
 			{ src: loadImage('assets/background/Asteroid 3.png') },
 			{ src: loadImage('assets/background/Asteroid 4.png') },
 			{ src: loadImage('assets/background/Asteroid 5.png') },
-			{ src: loadImage('../assets/background/Explosion Fire.gif') },
+			{ src: loadImage('assets/background/Explosion Fire.gif') },
 		];
 		this.rocketsImg = [
-			{ src: loadImage('../assets/background/rocket left.png') },
-			{ src: loadImage('../assets/background/rocket right.png') },
-			{ src: loadImage('../assets/background/blue propulsion left.gif') },
-			{ src: loadImage('../assets/background/blue propulsion right.gif') },
+			{ src: loadImage('assets/background/rocket left.png') },
+			{ src: loadImage('assets/background/rocket right.png') },
+			{ src: loadImage('assets/background/blue propulsion left.gif') },
+			{ src: loadImage('assets/background/blue propulsion right.gif') },
 		];
 	}
 

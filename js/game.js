@@ -1,5 +1,8 @@
 class Game {
 	constructor() {
+		this.isStarted = false;
+		this.isKeyboardEnable = false;
+		this.isMouseEnable = false;
 		this.background = new Background();
 		this.player = new Player();
 		// CHANGE THE MAX WIDTH AND HEIGHT
@@ -20,7 +23,7 @@ class Game {
 		// 	),
 		// ];
 		this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
-		this.asteroidFrequency = 9000
+		this.asteroidFrequency = 9000;
 		this.frameCount;
 		this.rocketsImg;
 		this.rocketRightAmmo = {
@@ -55,31 +58,31 @@ class Game {
 	setup() {
 		let col = color(0, 255, 255);
 
-		button = createButton('RELOAD WEAPONS');
-		button.style('font-size', '8px');
-		button.style('font-weight', 'bolder');
-		button.style('font-family', 'verdana');
-		button.style('width', '60px');
-		button.style('height', '60px');
-		button.style('border-radius', '10px');
-		button.style('border-style', 'outset');
-		button.style('background-color', col);
-		button.mousePressed(function () {
+		btnReloadWeapons = createButton('RELOAD WEAPONS');
+		btnReloadWeapons.style('font-size', '8px');
+		btnReloadWeapons.style('font-weight', 'bolder');
+		btnReloadWeapons.style('font-family', 'verdana');
+		btnReloadWeapons.style('width', '60px');
+		btnReloadWeapons.style('height', '60px');
+		btnReloadWeapons.style('border-radius', '10px');
+		btnReloadWeapons.style('border-style', 'outset');
+		btnReloadWeapons.style('background-color', col);
+		btnReloadWeapons.mousePressed(function () {
 			game.weapon.isWeaponReloading = true;
 			game.weapon.weaponFrameCount = frameCount;
 			game.weapon.isLoadingComplete = true;
 		});
 
-		button2 = createButton('PLAY AGAIN');
-		button2.style('font-size', '20px');
-		button2.style('font-weight', 'bolder');
-		button2.style('font-family', 'verdana');
-		button2.style('width', '120px');
-		button2.style('height', '80px');
-		button2.style('border-radius', '10px');
-		button2.style('border-style', 'outset');
-		button2.style('background-color', color(0, 255, 255));
-		button2.mousePressed(function () {
+		btnPlayAgaing = createButton('PLAY AGAIN');
+		btnPlayAgaing.style('font-size', '20px');
+		btnPlayAgaing.style('font-weight', 'bolder');
+		btnPlayAgaing.style('font-family', 'verdana');
+		btnPlayAgaing.style('width', '120px');
+		btnPlayAgaing.style('height', '80px');
+		btnPlayAgaing.style('border-radius', '10px');
+		btnPlayAgaing.style('border-style', 'outset');
+		btnPlayAgaing.style('background-color', color(0, 255, 255));
+		btnPlayAgaing.mousePressed(function () {
 			game.player.damage = 0;
 			game.ammo.ammo = 5;
 			game.asteroids = [
@@ -90,10 +93,6 @@ class Game {
 				),
 			];
 		});
-		// button.position(560, 470);
-		// button.position(563, 470);
-		// // button.position(567, 470);
-		// button2.position(-100, -100);
 	}
 
 	preload() {
@@ -133,10 +132,10 @@ class Game {
 		// ASTEROID
 		// CHANGE FREQUENCY
 		if (game.player.damage < 2) {
-			// button.position(560, 470);
-			button.position(563, 470);
-			// button.position(567, 470);
-			button2.position(-100, -100);
+			// btnReloadWeapons.position(560, 470);
+			btnReloadWeapons.position(563, 470);
+			// btnReloadWeapons.position(567, 470);
+			btnPlayAgaing.position(-100, -100);
 			if (frameCount % this.asteroidFrequency === 0) {
 				// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
 				this.asteroids.push(
@@ -146,7 +145,7 @@ class Game {
 						Math.floor(Math.random() * 5)
 					)
 				);
-				this.asteroidFrequency -= 30
+				this.asteroidFrequency -= 30;
 				// SOLO PARA PRUEBAS
 				// this.asteroids.push(
 				// 	new Asteroid(500, 200, Math.floor(Math.random() * 5))
@@ -186,8 +185,8 @@ class Game {
 
 				imageMode(CORNER);
 				translate(
-					 - this.rocketRightAmmo.explosionX,
-					 - this.rocketRightAmmo.explosionY
+					-this.rocketRightAmmo.explosionX,
+					-this.rocketRightAmmo.explosionY
 				);
 			} else {
 				this.rocketRightAmmo.isExplosion = false;
@@ -216,8 +215,8 @@ class Game {
 
 				imageMode(CORNER);
 				translate(
-					 - this.rocketLeftAmmo.explosionX,
-					- this.rocketLeftAmmo.explosionY
+					-this.rocketLeftAmmo.explosionX,
+					-this.rocketLeftAmmo.explosionY
 				);
 			} else {
 				this.rocketLeftAmmo.isExplosion = false;
@@ -326,18 +325,18 @@ class Game {
 
 			// MOVE THE SHIP
 			//MOUSE
-			// this.checkMouseRight();
-			// this.checkMouseLeft();
-			// this.checkMouseUp();
-			// this.checkMouseDown();
+			this.checkMouseRight();
+			this.checkMouseLeft();
+			this.checkMouseUp();
+			this.checkMouseDown();
 
 			//KEYBOARD
 			this.keyboardMove();
 		} else {
 			game.player.draw();
 
-			button.position(-100, -100);
-			button2.position(620, 455);
+			btnReloadWeapons.position(-100, -100);
+			btnPlayAgaing.position(620, 455);
 
 			//DISPLAY SCORE
 			fill(0, 255, 255);
@@ -347,43 +346,51 @@ class Game {
 	}
 
 	checkMouseRight() {
-		if (mouseX > 550 && mouseX <= 700) {
+		if (mouseX > 550 && mouseX <= 700 && this.isMouseEnable === true) {
 			game.player.movementX(-1);
-		} else if (mouseX > 700 && mouseX <= 1000) {
-			game.player.movementX(-2);
+		} else if (mouseX > 700 && mouseX <= 1000 && this.isMouseEnable === true) {
+			game.player.movementX(-3);
 		}
 	}
 	checkMouseLeft() {
-		if (mouseX < 450 && mouseX >= 300) {
+		if (mouseX < 450 && mouseX >= 300 && this.isMouseEnable === true) {
 			game.player.movementX(1);
-		} else if (mouseX >= 0 && mouseX < 300) {
-			game.player.movementX(2);
+		} else if (mouseX >= 0 && mouseX < 300 && this.isMouseEnable === true) {
+			game.player.movementX(3);
 		}
 	}
 	checkMouseUp() {
-		if (mouseY < 170 && game.horizont < 250) {
+		if (mouseY < 170 && game.horizont < 250 && this.isMouseEnable === true) {
 			game.player.movementY(1);
 		}
 	}
 
 	checkMouseDown() {
-		if (mouseY > 250 && game.horizont > -250) {
+		if (mouseY > 250 && game.horizont > -250 && this.isMouseEnable === true) {
 			game.player.movementY(-1);
 		}
 	}
 
 	keyboardMove() {
-		if (keyIsDown(UP_ARROW) && game.horizont < 250) {
-			game.player.movementY(2);
+		if (
+			keyIsDown(UP_ARROW) &&
+			game.horizont < 250 &&
+			this.isKeyboardEnable === true
+		) {
+			game.player.movementY(3);
 		}
-		if (keyIsDown(DOWN_ARROW) && game.horizont > -250) {
-			game.player.movementY(-2);
+		if (
+			keyIsDown(DOWN_ARROW) &&
+			game.horizont > -250 &&
+			this.isKeyboardEnable === true
+		) {
+			game.player.movementY(-3);
 		}
-		if (keyIsDown(RIGHT_ARROW) ) {
-			game.player.movementX(-5); 
+		if (keyIsDown(RIGHT_ARROW) && this.isKeyboardEnable === true) {
+			game.player.movementX(-3);
 		}
-		if (keyIsDown(LEFT_ARROW) ) {
-			game.player.movementX(5);
+		if (keyIsDown(LEFT_ARROW) && this.isKeyboardEnable === true) {
+			game.player.movementX(3);
 		}
 	}
 }

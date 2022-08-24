@@ -2,8 +2,8 @@ const game = new Game();
 let font,
 	fontsize = 40;
 
-let button;
-let button2;
+let btnReloadWeapons;
+let btnPlayAgaing;
 
 function preload() {
 	font = loadFont('../assets/fonts/BattleStar-K7dl7.ttf');
@@ -21,16 +21,6 @@ function setup() {
 
 function draw() {
 	game.draw();
-	// if (game.player.damage === 2) {
-	// 	this.button.position(-100, -100);
-	// 	button2.position(620, 455);
-	// 	game.player.draw();
-		
-	// 	//DISPLAY SCORE
-	// 	fill(0, 255, 255);
-	// 	textSize(60);
-	// 	text(game.player.score, 502, 250);
-	// }
 }
 
 function keyPressed() {
@@ -45,7 +35,7 @@ function keyPressed() {
 		game.ammo.ammoFrameCount = frameCount;
 	}
 
-	if (keyCode === 13) {
+	if (keyCode === 13 && game.isKeyboardEnable === true) {
 		game.weapon.isWeaponReloading = true;
 		game.weapon.weaponFrameCount = frameCount;
 		game.weapon.isLoadingComplete = true;

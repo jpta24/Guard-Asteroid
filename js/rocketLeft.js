@@ -9,6 +9,8 @@ class RocketLeft{
 	rocketLaunchLeft() {
 		imageMode(CENTER);
 		image(game.rocketsImg[0].src, this.x, this.y, this.width,this.height);
+        
+		ellipse(game.rocketLeft.x , game.rocketLeft.y , 10, 10)
 
 		// MOVE
         this.x *=1.009;

@@ -45,4 +45,10 @@ function keyPressed() {
 		game.ammo.ammoFrameCount = frameCount;
 	}
 
+	if (keyCode === 13) {
+		game.weapon.isWeaponReloading = true;
+		game.weapon.weaponFrameCount = frameCount;
+		game.weapon.isLoadingComplete = true;
+	}
+
 }

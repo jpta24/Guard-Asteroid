@@ -12,14 +12,14 @@ class Game {
 		this.horizont = 0;
 		this.rightWeapon = [];
 		// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
-		this.asteroids = [
-			new Asteroid(
-				Math.floor(Math.random() * 900) + 50,
-				Math.floor(Math.random() * 400) + 50,
-				Math.floor(Math.random() * 5)
-			),
-		];
-		// this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
+		// this.asteroids = [
+		// 	new Asteroid(
+		// 		Math.floor(Math.random() * 900) + 50,
+		// 		Math.floor(Math.random() * 400) + 50,
+		// 		Math.floor(Math.random() * 5)
+		// 	),
+		// ];
+		this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
 		this.frameCount;
 		this.rocketsImg;
 		this.rocketRightAmmo = {
@@ -169,8 +169,8 @@ class Game {
 				//EXPLOSION RIGHT AMMO
 				imageMode(CENTER);
 				translate(
-					this.north + this.rocketRightAmmo.explosionX,
-					this.horizont + this.rocketRightAmmo.explosionY
+					this.rocketRightAmmo.explosionX,
+					this.rocketRightAmmo.explosionY
 				);
 
 				image(
@@ -183,8 +183,8 @@ class Game {
 
 				imageMode(CORNER);
 				translate(
-					-this.north - this.rocketRightAmmo.explosionX,
-					-this.horizont - this.rocketRightAmmo.explosionY
+					 - this.rocketRightAmmo.explosionX,
+					 - this.rocketRightAmmo.explosionY
 				);
 			} else {
 				this.rocketRightAmmo.isExplosion = false;
@@ -199,8 +199,8 @@ class Game {
 				//EXPLOSION RIGHT AMMO
 				imageMode(CENTER);
 				translate(
-					this.north + this.rocketLeftAmmo.explosionX,
-					this.horizont + this.rocketLeftAmmo.explosionY
+					this.rocketLeftAmmo.explosionX,
+					this.rocketLeftAmmo.explosionY
 				);
 
 				image(
@@ -213,8 +213,8 @@ class Game {
 
 				imageMode(CORNER);
 				translate(
-					-this.north - this.rocketLeftAmmo.explosionX,
-					-this.horizont - this.rocketLeftAmmo.explosionY
+					 - this.rocketLeftAmmo.explosionX,
+					- this.rocketLeftAmmo.explosionY
 				);
 			} else {
 				this.rocketLeftAmmo.isExplosion = false;
@@ -304,7 +304,6 @@ class Game {
 			// DISPLAY AMMO
 			imageMode(CENTER);
 			let displayAmmos = (x1, dist) => {
-				console.log(this.ammo.ammo);
 				for (let i = 0; i < this.ammo.ammo; i++) {
 					image(this.playerImg[4].src, x1 + dist * i, 400, 17, 33);
 				}
@@ -324,10 +323,10 @@ class Game {
 
 			// MOVE THE SHIP
 			//MOUSE
-			this.checkMouseRight();
-			this.checkMouseLeft();
-			this.checkMouseUp();
-			this.checkMouseDown();
+			// this.checkMouseRight();
+			// this.checkMouseLeft();
+			// this.checkMouseUp();
+			// this.checkMouseDown();
 
 			//KEYBOARD
 			this.keyboardMove();

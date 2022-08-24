@@ -9,6 +9,8 @@ class RocketRight {
 	rocketLaunchRight() {
 		imageMode(CENTER);
 		image(game.rocketsImg[1].src, this.x, this.y, this.width, this.height);
+        
+		ellipse(game.rocketRight.x , game.rocketRight.y , 10, 10)
 
 		// MOVE
 		this.x *= 0.997;

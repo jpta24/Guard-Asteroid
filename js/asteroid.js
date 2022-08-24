@@ -11,8 +11,7 @@ class Asteroid {
 		this.turn = 45;
 		this.damage = 0;
 		this.randomImgNumber = number;
-		this.isActive = true
-		
+		this.isActive = true;
 	}
 	draw() {
 		imageMode(CENTER);
@@ -47,69 +46,108 @@ class Asteroid {
 		imageMode(CORNER);
 		translate(-game.north - this.x, -game.horizont - this.y);
 
-		this.provideDamage()
+		this.provideDamage();
+
+		ellipse(
+			game.north + this.x - this.width / 3,
+			game.horizont + this.y - this.width / 3,
+			4,
+			4
+		);
+		ellipse(
+			game.north + this.x + this.width / 3,
+			game.horizont + this.y - this.width / 3,
+			4,
+			4
+		);
+		ellipse(
+			game.north + this.x - this.width / 3,
+			game.horizont + this.y + this.width / 3,
+			4,
+			4
+		);
+		ellipse(
+			game.north + this.x + this.width / 3,
+			game.horizont + this.y + this.width / 3,
+			4,
+			4
+		);
+		ellipse(game.north + this.x, game.horizont + this.y, 4, 4);
 	}
 
 	receiveDamage() {
 		//ROCKET RIGHT
+
+		console.log(
+			this.x -
+				this.width / 2.5 +
+				' - ' +
+				(game.rocketRight.x - game.rocketRight.width / 2.5) +
+				' - ' +
+				(this.x + this.width / 2.5)
+		);
+		console.log(
+			'w:' +
+				this.width +
+				' - w/2:' +
+				this.width / 2.5 +
+				'/ x:' +
+				this.x +
+				' - x-w2:' +
+				(this.x - this.width / 2.5)
+		);
 		if (
-			this.z - game.rocketRight.z < 25 &&
-			this.z - game.rocketRight.z > -25 &&
-			game.rocketRight.x - game.rocketRight.width / 2.5 >
-				this.x - this.width / 2.5 &&
-			game.rocketRight.x - game.rocketRight.width / 2.5 <
-				this.x + this.width / 2.5 &&
-			game.rocketRight.y > this.y - this.height / 2.5 &&
-			game.rocketRight.y < this.y + this.height / 2.5
+			// this.z - game.rocketRight.z < 250 &&
+			// this.z - game.rocketRight.z > -250 &&
+			game.rocketRight.x > game.north + this.x - this.width / 2.5 &&
+			game.rocketRight.x < game.north + this.x + this.width / 2.5 &&
+			game.rocketRight.y > game.horizont + this.y - this.width / 3 &&
+			game.rocketRight.y < game.horizont + this.y + this.width / 3
 		) {
 			this.damage++;
 
 			game.rocketRightAmmo.isExplosion = true;
-			game.rocketRightAmmo.explosionFrameCount = frameCount
-			
-			game.rocketRightAmmo.explosionX = game.north + game.rocketRight.x
-			game.rocketRightAmmo.explosionY = game.horizont + game.rocketRight.y
-			game.rocketRightAmmo.explosionH = this.height/2
-			game.rocketRightAmmo.explosionW = this.width/2
-			
+			game.rocketRightAmmo.explosionFrameCount = frameCount;
+
+			game.rocketRightAmmo.explosionX = game.rocketRight.x;
+			game.rocketRightAmmo.explosionY = game.rocketRight.y;
+			game.rocketRightAmmo.explosionH = this.height / 2;
+			game.rocketRightAmmo.explosionW = this.width / 2;
+
 			game.rocketRight.y = -2000;
 		}
 
 		//ROCKET LEFT
 		if (
-			this.z - game.rocketLeft.z < 25 &&
-			this.z - game.rocketLeft.z > -25 &&
-			game.rocketLeft.x + game.rocketLeft.width / 2.5 >
-				this.x - this.width / 2.5 &&
-			game.rocketLeft.x + game.rocketLeft.width / 2.5 <
-				this.x + this.width / 2.5 &&
-			game.rocketLeft.y > this.y - this.height / 2.5 &&
-			game.rocketLeft.y < this.y + this.height / 2.5
+			// this.z - game.rocketLeft.z < 250 &&
+			// this.z - game.rocketLeft.z > -250 &&
+			game.rocketLeft.x > game.north + this.x - this.width / 2.5 &&
+			game.rocketLeft.x < game.north + this.x + this.width / 2.5 &&
+			game.rocketLeft.y > game.horizont + this.y - this.width / 3 &&
+			game.rocketLeft.y < game.horizont + this.y + this.width / 3
 		) {
 			this.damage++;
 
 			game.rocketLeftAmmo.isExplosion = true;
-			game.rocketLeftAmmo.explosionFrameCount = frameCount
-			
-			game.rocketLeftAmmo.explosionX = game.north + game.rocketLeft.x
-			game.rocketLeftAmmo.explosionY = game.horizont + game.rocketLeft.y
-			game.rocketLeftAmmo.explosionH = this.height/2
-			game.rocketLeftAmmo.explosionW = this.width/2
-			
+			game.rocketLeftAmmo.explosionFrameCount = frameCount;
+
+			game.rocketLeftAmmo.explosionX = game.rocketLeft.x;
+			game.rocketLeftAmmo.explosionY = game.rocketLeft.y;
+			game.rocketLeftAmmo.explosionH = this.height / 2;
+			game.rocketLeftAmmo.explosionW = this.width / 2;
+
 			game.rocketLeft.y = -2000;
 		}
-		if (this.damage >=2) {
-			this.isActive = false
-			game.player.score ++
+		if (this.damage >= 2) {
+			this.isActive = false;
+			game.player.score++;
 		}
 	}
 
-	provideDamage(){
-
+	provideDamage() {
 		if (this.z < 10) {
-			game.player.damage +=1
-			this.isActive = false
+			game.player.damage += 1;
+			this.isActive = false;
 		}
-		
 	}
 }

@@ -22,8 +22,8 @@ class Game {
 		// 		Math.floor(Math.random() * 5)
 		// 	),
 		// ];
-		this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
-		this.asteroidFrequency = 9000;
+		// this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
+		this.asteroidFrequency = 900;
 		this.frameCount;
 		this.rocketsImg;
 		this.rocketRightAmmo = {
@@ -92,6 +92,59 @@ class Game {
 					Math.floor(Math.random() * 5)
 				),
 			];
+			game.score = 0
+		});
+		// INITIAL POSITION
+		btnReloadWeapons.position(-200, -200);
+		btnPlayAgaing.position(-100, -100);
+
+		
+		btnPlayWithKeyboard = createButton('KEYBOARD');
+		btnPlayWithKeyboard.style('font-size', '15px');
+		btnPlayWithKeyboard.style('font-weight', 'bolder');
+		btnPlayWithKeyboard.style('font-family', 'verdana');
+		btnPlayWithKeyboard.style('width', '120px');
+		btnPlayWithKeyboard.style('height', '80px');
+		btnPlayWithKeyboard.style('border-radius', '10px');
+		btnPlayWithKeyboard.style('border-style', 'outset');
+		btnPlayWithKeyboard.style('background-color', color(0, 255, 255));
+		btnPlayWithKeyboard.position(470, 320);
+		btnPlayWithKeyboard.mousePressed(function () {
+			game.isKeyboardEnable = true
+			game.isStarted = true
+			game.asteroids = [
+				new Asteroid(
+					Math.floor(Math.random() * 900) + 50,
+					Math.floor(Math.random() * 400) + 50,
+					Math.floor(Math.random() * 5)
+				),
+			];
+			btnPlayWithKeyboard.position(-200, -200);
+			btnPlayWithMouse.position(-100, -100);
+		});
+
+		btnPlayWithMouse = createButton('MOUSE');
+		btnPlayWithMouse.style('font-size', '15px');
+		btnPlayWithMouse.style('font-weight', 'bolder');
+		btnPlayWithMouse.style('font-family', 'verdana');
+		btnPlayWithMouse.style('width', '120px');
+		btnPlayWithMouse.style('height', '80px');
+		btnPlayWithMouse.style('border-radius', '10px');
+		btnPlayWithMouse.style('border-style', 'outset');
+		btnPlayWithMouse.style('background-color', color(0, 255, 255));
+		btnPlayWithMouse.position(750, 320);
+		btnPlayWithMouse.mousePressed(function () {
+			game.isMouseEnable = true
+			game.isStarted = true
+			game.asteroids = [
+				new Asteroid(
+					Math.floor(Math.random() * 900) + 50,
+					Math.floor(Math.random() * 400) + 50,
+					Math.floor(Math.random() * 5)
+				),
+			];
+			btnPlayWithKeyboard.position(-200, -200);
+			btnPlayWithMouse.position(-100, -100);
 		});
 	}
 
@@ -108,6 +161,8 @@ class Game {
 			{ src: loadImage('../assets/background/panel damaged.png') },
 			{ src: loadImage('../assets/background/rocket panel.png') },
 			{ src: loadImage('../assets/background/Game over.png') },
+			{ src: loadImage('../assets/background/Start Panel.png') },
+
 		];
 		this.asteroidImgs = [
 			{ src: loadImage('assets/background/Asteroid 1.png') },
@@ -131,7 +186,7 @@ class Game {
 
 		// ASTEROID
 		// CHANGE FREQUENCY
-		if (game.player.damage < 2) {
+		if (game.player.damage < 2 && this.isStarted === true) {
 			// btnReloadWeapons.position(560, 470);
 			btnReloadWeapons.position(563, 470);
 			// btnReloadWeapons.position(567, 470);
@@ -332,7 +387,7 @@ class Game {
 
 			//KEYBOARD
 			this.keyboardMove();
-		} else {
+		} else if(game.player.damage === 2 && this.isStarted === true) {
 			game.player.draw();
 
 			btnReloadWeapons.position(-100, -100);
@@ -342,6 +397,8 @@ class Game {
 			fill(0, 255, 255);
 			textSize(60);
 			text(game.player.score, 502, 250);
+		} else {
+			game.player.draw();
 		}
 	}
 

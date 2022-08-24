@@ -13,8 +13,11 @@ class Player {
 		if (this.damage === 2) {
 			imgPanel = game.playerImg[5]
 		}
+		if (game.isStarted === false) {
+			imgPanel = game.playerImg[6]
+		}
 		image(imgPanel.src, -10, -10, width + 21, height + 22);
-		if (this.damage !== 2) {
+		if (this.damage !== 2 && game.isStarted === true) {
 			this.radar();
 		}
 		

@@ -4,6 +4,8 @@ let font,
 
 let btnReloadWeapons;
 let btnPlayAgaing;
+let btnPlayWithKeyboard;
+let btnPlayWithMouse;
 
 function preload() {
 	font = loadFont('../assets/fonts/BattleStar-K7dl7.ttf');

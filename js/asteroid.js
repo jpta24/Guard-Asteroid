@@ -88,6 +88,8 @@ class Asteroid {
 		translate(-game.north - this.x + 3600, -game.horizont - this.y);
 		// END ASTEROID 3
 
+		
+
 		this.turn += 0.2;
 
 		this.provideDamage();
@@ -139,7 +141,7 @@ class Asteroid {
 				game.rocketRight.y < game.horizont + this.y + targetArea)
 		) {
 			this.damage++;
-
+			explosioAudio.play()
 			game.rocketRightAmmo.isExplosion = true;
 			game.rocketRightAmmo.explosionFrameCount = frameCount;
 
@@ -167,7 +169,7 @@ class Asteroid {
 				game.rocketLeft.y < game.horizont + this.y + targetArea)
 		) {
 			this.damage++;
-
+			explosioAudio.play()
 			game.rocketLeftAmmo.isExplosion = true;
 			game.rocketLeftAmmo.explosionFrameCount = frameCount;
 
@@ -188,6 +190,7 @@ class Asteroid {
 		if (this.z < 10) {
 			game.player.damage += 1;
 			this.isActive = false;
+			// crashAudio.play()
 		}
 	}
 }

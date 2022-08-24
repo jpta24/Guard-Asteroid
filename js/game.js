@@ -119,6 +119,10 @@ class Game {
 					Math.floor(Math.random() * 5)
 				),
 			];
+			
+			// game.asteroids = [new Asteroid(2300, 200, Math.floor(Math.random() * 5))]
+					
+				
 			btnPlayWithKeyboard.position(-200, -200);
 			btnPlayWithMouse.position(-100, -100);
 		});
@@ -146,6 +150,7 @@ class Game {
 			btnPlayWithKeyboard.position(-200, -200);
 			btnPlayWithMouse.position(-100, -100);
 		});
+
 	}
 
 	preload() {
@@ -195,7 +200,7 @@ class Game {
 				// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
 				this.asteroids.push(
 					new Asteroid(
-						Math.floor(Math.random() * 900) + 50,
+						Math.floor(Math.random() * 3500) + 50,
 						Math.floor(Math.random() * 400) + 50,
 						Math.floor(Math.random() * 5)
 					)
@@ -282,6 +287,7 @@ class Game {
 			if (game.frameCount + 90 > frameCount && game.frameCount > 0) {
 				game.rocketLeft.rocketLaunchLeft();
 				game.rocketRight.rocketLaunchRight();
+				laserAudio.play()
 				for (let i = this.asteroids.length - 1; i >= 0; i--) {
 					this.asteroids[i].receiveDamage();
 				}

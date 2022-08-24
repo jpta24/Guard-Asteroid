@@ -3,8 +3,8 @@ class Asteroid {
 		this.x = x;
 		this.y = y;
 		this.z = 1000;
-		this.width = 10;
-		this.height = 10;
+		this.width = 5;
+		this.height = 5;
 		this.scale = 0;
 		this.speed = 10;
 		this.size = 1;
@@ -48,57 +48,37 @@ class Asteroid {
 
 		this.provideDamage();
 
-		ellipse(
-			game.north + this.x - this.width / 3,
-			game.horizont + this.y - this.width / 3,
-			4,
-			4
-		);
-		ellipse(
-			game.north + this.x + this.width / 3,
-			game.horizont + this.y - this.width / 3,
-			4,
-			4
-		);
-		ellipse(
-			game.north + this.x - this.width / 3,
-			game.horizont + this.y + this.width / 3,
-			4,
-			4
-		);
-		ellipse(
-			game.north + this.x + this.width / 3,
-			game.horizont + this.y + this.width / 3,
-			4,
-			4
-		);
-		ellipse(game.north + this.x, game.horizont + this.y, 4, 4);
+		//REFERENCE TO SEE TARGET AREA OF THE ASTEROID
+		// ellipse(
+		// 	game.north + this.x - this.width / 3,
+		// 	game.horizont + this.y - this.width / 3,
+		// 	4,
+		// 	4
+		// );
+		// ellipse(
+		// 	game.north + this.x + this.width / 3,
+		// 	game.horizont + this.y - this.width / 3,
+		// 	4,
+		// 	4
+		// );
+		// ellipse(
+		// 	game.north + this.x - this.width / 3,
+		// 	game.horizont + this.y + this.width / 3,
+		// 	4,
+		// 	4
+		// );
+		// ellipse(
+		// 	game.north + this.x + this.width / 3,
+		// 	game.horizont + this.y + this.width / 3,
+		// 	4,
+		// 	4
+		// );
+		// ellipse(game.north + this.x, game.horizont + this.y, 4, 4);
 	}
 
 	receiveDamage() {
 		//ROCKET RIGHT
-
-		console.log(
-			this.x -
-				this.width / 2.5 +
-				' - ' +
-				(game.rocketRight.x - game.rocketRight.width / 2.5) +
-				' - ' +
-				(this.x + this.width / 2.5)
-		);
-		console.log(
-			'w:' +
-				this.width +
-				' - w/2:' +
-				this.width / 2.5 +
-				'/ x:' +
-				this.x +
-				' - x-w2:' +
-				(this.x - this.width / 2.5)
-		);
 		if (
-			// this.z - game.rocketRight.z < 250 &&
-			// this.z - game.rocketRight.z > -250 &&
 			game.rocketRight.x > game.north + this.x - this.width / 2.5 &&
 			game.rocketRight.x < game.north + this.x + this.width / 2.5 &&
 			game.rocketRight.y > game.horizont + this.y - this.width / 3 &&
@@ -119,8 +99,6 @@ class Asteroid {
 
 		//ROCKET LEFT
 		if (
-			// this.z - game.rocketLeft.z < 250 &&
-			// this.z - game.rocketLeft.z > -250 &&
 			game.rocketLeft.x > game.north + this.x - this.width / 2.5 &&
 			game.rocketLeft.x < game.north + this.x + this.width / 2.5 &&
 			game.rocketLeft.y > game.horizont + this.y - this.width / 3 &&

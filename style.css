@@ -4,5 +4,23 @@ body {
 }
 
 canvas {
+    margin-top: 50px;
     cursor: crosshair;
+}
+
+.ironhackLogo img{
+    max-width:150px;
+    position:absolute;
+    left:20px;
+    top:50px
+}
+
+.explination {
+    font-size: 16px;
+    color:white;
+    position: absolute;
+    left:20px;
+    top:220px;
+    width: 150px;
+
 }

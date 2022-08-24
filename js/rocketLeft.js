@@ -11,7 +11,7 @@ class RocketLeft{
 		image(game.rocketsImg[0].src, this.x, this.y, this.width,this.height);
 
         //REFERENCE TO SEE THE ROCKET
-		//ellipse(game.rocketLeft.x , game.rocketLeft.y , 10, 10)
+		// ellipse(game.rocketLeft.x , game.rocketLeft.y , 10, 10)
 
 		// MOVE
         this.x *=1.009;

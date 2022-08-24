@@ -8,7 +8,6 @@ class Background {
 		image(img.src, img.x + 1000, img.y - 250, width, height * 2);
 		image(img.src, img.x - 1000, img.y - 250, width, height * 2);
 
-		console.log(game.north);
 
 		if (game.north <= -3600) game.north = 0;
 		if (game.north >= 3600) game.north = 0;

@@ -64,13 +64,13 @@ class Asteroid {
 		rotate(360 - this.turn);
 
 		imageMode(CORNER);
-		translate(-game.north - this.x-3600, -game.horizont - this.y);
+		translate(-game.north - this.x - 3600, -game.horizont - this.y);
 		// END ASTEROID 2
 		// ASTEROID 3
 		imageMode(CENTER);
-		
+
 		angleMode(DEGREES);
-		translate(game.north + this.x-3600, game.horizont + this.y);
+		translate(game.north + this.x - 3600, game.horizont + this.y);
 
 		rotate(this.turn);
 
@@ -85,49 +85,58 @@ class Asteroid {
 		rotate(360 - this.turn);
 
 		imageMode(CORNER);
-		translate(-game.north - this.x+3600, -game.horizont - this.y);
+		translate(-game.north - this.x + 3600, -game.horizont - this.y);
 		// END ASTEROID 3
-		
+
 		this.turn += 0.2;
-		
 
 		this.provideDamage();
 
-		//REFERENCE TO SEE TARGET AREA OF THE ASTEROID
+		// REFERENCE TO SEE TARGET AREA OF THE ASTEROID
 		// ellipse(
-		// 	game.north + this.x - this.width / 3,
+		// 	game.north + this.x + 3600 - this.width / 3,
 		// 	game.horizont + this.y - this.width / 3,
 		// 	4,
 		// 	4
 		// );
 		// ellipse(
-		// 	game.north + this.x + this.width / 3,
+		// 	game.north + this.x + 3600 + this.width / 3,
 		// 	game.horizont + this.y - this.width / 3,
 		// 	4,
 		// 	4
 		// );
 		// ellipse(
-		// 	game.north + this.x - this.width / 3,
+		// 	game.north + this.x + 3600 - this.width / 3,
 		// 	game.horizont + this.y + this.width / 3,
 		// 	4,
 		// 	4
 		// );
 		// ellipse(
-		// 	game.north + this.x + this.width / 3,
+		// 	game.north + this.x + 3600 + this.width / 3,
 		// 	game.horizont + this.y + this.width / 3,
 		// 	4,
 		// 	4
 		// );
-		// ellipse(game.north + this.x, game.horizont + this.y, 4, 4);
+		// ellipse(game.north + this.x + 3600, game.horizont + this.y, 4, 4);
 	}
 
 	receiveDamage() {
+		let targetArea = this.width/3
+		
 		//ROCKET RIGHT
 		if (
-			game.rocketRight.x > game.north + this.x - this.width / 2.5 &&
-			game.rocketRight.x < game.north + this.x + this.width / 2.5 &&
-			game.rocketRight.y > game.horizont + this.y - this.width / 3 &&
-			game.rocketRight.y < game.horizont + this.y + this.width / 3
+			(game.rocketRight.x > game.north + this.x - targetArea &&
+				game.rocketRight.x < game.north + this.x + targetArea &&
+				game.rocketRight.y > game.horizont + this.y - targetArea &&
+				game.rocketRight.y < game.horizont + this.y + targetArea) ||
+			(game.rocketRight.x > game.north + this.x  + 3600 - targetArea &&
+				game.rocketRight.x < game.north + this.x + 3600 + targetArea  &&
+				game.rocketRight.y > game.horizont + this.y - targetArea &&
+				game.rocketRight.y < game.horizont + this.y + targetArea) ||
+			(game.rocketRight.x > game.north + this.x  - 3600 - targetArea &&
+				game.rocketRight.x < game.north + this.x - 3600 + targetArea  &&
+				game.rocketRight.y > game.horizont + this.y - targetArea &&
+				game.rocketRight.y < game.horizont + this.y + targetArea)
 		) {
 			this.damage++;
 
@@ -144,10 +153,18 @@ class Asteroid {
 
 		//ROCKET LEFT
 		if (
-			game.rocketLeft.x > game.north + this.x - this.width / 2.5 &&
-			game.rocketLeft.x < game.north + this.x + this.width / 2.5 &&
-			game.rocketLeft.y > game.horizont + this.y - this.width / 3 &&
-			game.rocketLeft.y < game.horizont + this.y + this.width / 3
+			(game.rocketLeft.x > game.north + this.x - targetArea &&
+				game.rocketLeft.x < game.north + this.x + targetArea &&
+				game.rocketLeft.y > game.horizont + this.y - targetArea &&
+				game.rocketLeft.y < game.horizont + this.y + targetArea) ||
+			(game.rocketLeft.x > game.north + this.x  + 3600 - targetArea &&
+				game.rocketLeft.x < game.north + this.x + 3600 + targetArea  &&
+				game.rocketLeft.y > game.horizont + this.y - targetArea &&
+				game.rocketLeft.y < game.horizont + this.y + targetArea) ||
+			(game.rocketLeft.x > game.north + this.x  - 3600 - targetArea &&
+				game.rocketLeft.x < game.north + this.x - 3600 + targetArea  &&
+				game.rocketLeft.y > game.horizont + this.y - targetArea &&
+				game.rocketLeft.y < game.horizont + this.y + targetArea)
 		) {
 			this.damage++;
 

@@ -45,16 +45,4 @@ function keyPressed() {
 		game.ammo.ammoFrameCount = frameCount;
 	}
 
-	if (keyCode === 39) {
-		game.player.movementX(-10);
-	}
-	if (keyCode === 37) {
-		game.player.movementX(10);
-	}
-	if (keyCode === 38) {
-		game.player.movementY(10);
-	}
-	if (keyCode === 40) {
-		game.player.movementY(-10);
-	}
 }

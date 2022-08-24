@@ -41,7 +41,7 @@ class Game {
 		this.ammo = {
 			ammoFrameCount: 0,
 			isAmmoReloading: false,
-			ammo: 4,
+			ammo: 5,
 			timerFixer: 0,
 		};
 		this.weapon = {
@@ -80,7 +80,7 @@ class Game {
 		button2.style('background-color', color(0, 255, 255));
 		button2.mousePressed(function () {
 			game.player.damage = 0;
-			game.ammo.ammo = 4;
+			game.ammo.ammo = 5;
 			game.asteroids = [
 				new Asteroid(
 					Math.floor(Math.random() * 900) + 50,
@@ -90,19 +90,9 @@ class Game {
 			];
 		});
 		// button.position(560, 470);
-		button.position(563, 470);
-		// button.position(567, 470);
-		button2.position(-100, -100);
-		// if (game.player.damage === 2) {
-		// 	console.log('h');
-		// 	button.position(-100, -100);
-		// 	button2.position(620, 455);
-		// } else {
-		// 	// button.position(560, 470);
-		// 	button.position(563, 470);
-		// 	// button.position(567, 470);
-		// 	button2.position(-100, -100);
-		// }
+		// button.position(563, 470);
+		// // button.position(567, 470);
+		// button2.position(-100, -100);
 	}
 
 	preload() {
@@ -145,7 +135,7 @@ class Game {
 			button.position(563, 470);
 			// button.position(567, 470);
 			button2.position(-100, -100);
-			if (frameCount % 360 === 0) {
+			if (frameCount % 900 === 0) {
 				// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
 				this.asteroids.push(
 					new Asteroid(
@@ -282,7 +272,7 @@ class Game {
 				this.weapon.isWeaponReloading === false &&
 				this.weapon.isLoadingComplete === true
 			) {
-				this.ammo.ammo = 4;
+				this.ammo.ammo = 5;
 				this.weapon.isLoadingComplete = false;
 			}
 
@@ -314,6 +304,7 @@ class Game {
 			// DISPLAY AMMO
 			imageMode(CENTER);
 			let displayAmmos = (x1, dist) => {
+				console.log(this.ammo.ammo);
 				for (let i = 0; i < this.ammo.ammo; i++) {
 					image(this.playerImg[4].src, x1 + dist * i, 400, 17, 33);
 				}
@@ -332,10 +323,14 @@ class Game {
 			}
 
 			// MOVE THE SHIP
-			// this.checkMouseRight()
-			// this.checkMouseLeft()
-			// this.checkMouseUp()
-			// this.checkMouseDown()
+			//MOUSE
+			this.checkMouseRight();
+			this.checkMouseLeft();
+			this.checkMouseUp();
+			this.checkMouseDown();
+
+			//KEYBOARD
+			this.keyboardMove();
 		} else {
 			game.player.draw();
 
@@ -374,15 +369,19 @@ class Game {
 			game.player.movementY(-1);
 		}
 	}
-	/* keyPressed() { 
-		
-		
-		if (keyCode === 32) {
-			this.frameCount = frameCount
-			console.log(frameCount);
-			game.player.fireWeaponRight()
-			console.log('h');
-			
+
+	keyboardMove() {
+		if (keyIsDown(UP_ARROW) && game.horizont < 250) {
+			game.player.movementY(2);
 		}
-	} */
+		if (keyIsDown(DOWN_ARROW) && game.horizont > -250) {
+			game.player.movementY(-2);
+		}
+		if (keyIsDown(RIGHT_ARROW) ) {
+			game.player.movementX(-2);
+		}
+		if (keyIsDown(LEFT_ARROW) ) {
+			game.player.movementX(2);
+		}
+	}
 }

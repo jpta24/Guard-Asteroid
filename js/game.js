@@ -20,6 +20,7 @@ class Game {
 		// 	),
 		// ];
 		this.asteroids = [new Asteroid(408, 150, Math.floor(Math.random() * 5))];
+		this.asteroidFrequency = 9000
 		this.frameCount;
 		this.rocketsImg;
 		this.rocketRightAmmo = {
@@ -99,6 +100,7 @@ class Game {
 		this.backgroundImages = [
 			{ src: loadImage('assets/background/sky.png'), x: 0, y: 0, speed: 0 },
 			{ src: loadImage('assets/background/Galaxy1.png') },
+			{ src: loadImage('assets/background/moon.png') },
 		];
 		this.playerImg = [
 			{ src: loadImage('assets/background/panel.png') },
@@ -135,7 +137,7 @@ class Game {
 			button.position(563, 470);
 			// button.position(567, 470);
 			button2.position(-100, -100);
-			if (frameCount % 900 === 0) {
+			if (frameCount % this.asteroidFrequency === 0) {
 				// FUNCIONA PERO LO CAMBIO A POSICION FIJA PARA EVALUAR LA BALA
 				this.asteroids.push(
 					new Asteroid(
@@ -144,6 +146,7 @@ class Game {
 						Math.floor(Math.random() * 5)
 					)
 				);
+				this.asteroidFrequency -= 30
 				// SOLO PARA PRUEBAS
 				// this.asteroids.push(
 				// 	new Asteroid(500, 200, Math.floor(Math.random() * 5))
@@ -377,10 +380,10 @@ class Game {
 			game.player.movementY(-2);
 		}
 		if (keyIsDown(RIGHT_ARROW) ) {
-			game.player.movementX(-2);
+			game.player.movementX(-5); 
 		}
 		if (keyIsDown(LEFT_ARROW) ) {
-			game.player.movementX(2);
+			game.player.movementX(5);
 		}
 	}
 }

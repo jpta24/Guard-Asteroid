@@ -14,8 +14,6 @@ class Asteroid {
 		this.isActive = true;
 	}
 	draw() {
-		imageMode(CENTER);
-
 		// INCREASE SIZE
 		if (this.width < 1020) {
 			this.width *= 1.003;
@@ -24,9 +22,11 @@ class Asteroid {
 			this.z -= 0.648;
 		}
 
-		// Change Inicial Width and Height
+		imageMode(CENTER);
 
 		// ASTEROID ROTATION
+
+		// ASTEROID 1
 		angleMode(DEGREES);
 		translate(game.north + this.x, game.horizont + this.y);
 
@@ -42,9 +42,54 @@ class Asteroid {
 
 		rotate(360 - this.turn);
 
-		this.turn += 0.2;
 		imageMode(CORNER);
 		translate(-game.north - this.x, -game.horizont - this.y);
+		// END ASTEROID 1
+
+		// ASTEROID 2
+		imageMode(CENTER);
+		angleMode(DEGREES);
+		translate(game.north + this.x + 3600, game.horizont + this.y);
+
+		rotate(this.turn);
+
+		image(
+			game.asteroidImgs[this.randomImgNumber].src,
+			0,
+			0,
+			this.width,
+			this.height
+		);
+
+		rotate(360 - this.turn);
+
+		imageMode(CORNER);
+		translate(-game.north - this.x-3600, -game.horizont - this.y);
+		// END ASTEROID 2
+		// ASTEROID 3
+		imageMode(CENTER);
+		
+		angleMode(DEGREES);
+		translate(game.north + this.x-3600, game.horizont + this.y);
+
+		rotate(this.turn);
+
+		image(
+			game.asteroidImgs[this.randomImgNumber].src,
+			0,
+			0,
+			this.width,
+			this.height
+		);
+
+		rotate(360 - this.turn);
+
+		imageMode(CORNER);
+		translate(-game.north - this.x+3600, -game.horizont - this.y);
+		// END ASTEROID 3
+		
+		this.turn += 0.2;
+		
 
 		this.provideDamage();
 

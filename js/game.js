@@ -158,7 +158,15 @@ class Game {
 			{ src: loadImage('assets/background/sky.png'), x: 0, y: 0, speed: 0 },
 			{ src: loadImage('assets/background/Galaxy1.png') },
 			{ src: loadImage('assets/background/moon.png') },
-		];
+			{ src: loadImage('assets/background/planet1.png') },
+			{ src: loadImage('assets/background/planet2.png') },
+			{ src: loadImage('assets/background/planet3.png') },
+			{ src: loadImage('assets/background/planet4.png') },
+			{ src: loadImage('assets/background/planet5.png') },
+			{ src: loadImage('assets/background/satellit.png') },
+			{ src: loadImage('assets/background/rock1.png') },
+			{ src: loadImage('assets/background/rock2.png') },
+		]
 		this.playerImg = [
 			{ src: loadImage('assets/background/panel.png') },
 			{ src: loadImage('assets/background/radar.png') },
@@ -287,7 +295,10 @@ class Game {
 			if (game.frameCount + 90 > frameCount && game.frameCount > 0) {
 				game.rocketLeft.rocketLaunchLeft();
 				game.rocketRight.rocketLaunchRight();
-				laserAudio.play()
+				if (!laserAudio.isPlaying()) {
+					laserAudio.play()
+				}
+				
 				for (let i = this.asteroids.length - 1; i >= 0; i--) {
 					this.asteroids[i].receiveDamage();
 				}

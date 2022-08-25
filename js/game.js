@@ -71,6 +71,9 @@ class Game {
 			game.weapon.isWeaponReloading = true;
 			game.weapon.weaponFrameCount = frameCount;
 			game.weapon.isLoadingComplete = true;
+			if (!reloadWeaponAudio.isPlaying()) {
+				reloadWeaponAudio.play()
+			}
 		});
 
 		btnPlayAgaing = createButton('PLAY AGAIN');

@@ -19,8 +19,8 @@ function preload() {
 	laserAudio = loadSound('assets/audio/Laser.mp3');
 	explosioAudio = loadSound('assets/audio/Explosion Hit.mp3');
 	crashAudio = loadSound('assets/audio/Ship Crashing.mp3');
-	reloadWeaponAudio = loadSound('../assets/audio/reloadWeapon.mp3')
-	reloadAmmoAudio = loadSound('../assets/audio/reloadAmmo.mp3')
+	reloadWeaponAudio = loadSound('assets/audio/reloadWeapon.mp3')
+	reloadAmmoAudio = loadSound('assets/audio/reloadAmmo.mp3')
 	game.preload();
 }
 
